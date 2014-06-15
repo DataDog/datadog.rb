@@ -1,0 +1,29 @@
+# Stylistic choices for this project.
+# Attempts have been made to use good choices, increasing readability and
+# matching current idioms, but sometimes have been overridden here.
+# Most have explanations, so if you wonder why this was done in a particular
+# manner, read the explanation before trying to change it.
+
+AllCops:
+  Include:
+    # Include any ruby control files
+    - '**/*.gemspec'
+    - '**/Gemfile'
+    - '**/Guardfile'
+    - '**/Rakefile'
+    - 'tasks/**/*'
+  Exclude:
+    - 'vendor/**/*'
+
+# I don't expect to use any Unicode/UTF-8 characters in the codebase, and
+# testing Ruby version 1.9.3 fails rubocop test if this cop is enabled.
+# Development is done on 2.1.x, so I could either allow failures for any
+# other versions, or disable this cop and continue to try and maintain compat.
+Style/Encoding:
+  Enabled: false
+
+# This case determines the use of the %r for auto-escaping regexes with paths
+# in them. Since these largely come from external sources, and have little
+# bearing on the code included in the library, disable this style.
+Style/RegexpLiteral:
+  Enabled: false

@@ -1,4 +1,4 @@
-# Datadog
+# Datadog Ruby Bindings
 
 TODO: Write a gem description
 
