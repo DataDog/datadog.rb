@@ -1,7 +1,8 @@
+sudo: true
 language: ruby
-rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
-  - 2.1.2
+cache: bundler
 bundler_args: --without doc localdev
+rvm:
+  - 2.0
+  - 2.1
+  - 2.2

@@ -43,7 +43,10 @@ TODO: Write usage instructions here
 
 ### Prior Art
 
+This library leans heavily on the concepts and patterns in the [octokit] gem.
+
 See [dogapi-rb] and [dogstatsd-ruby] for prior Ruby client work.
 
 [dogapi-rb]: https://rubygems.org/gems/dogapi
 [dogstatsd-ruby]: https://rubygems.org/gems/dogstatsd-ruby
+[octokit]: http://octokit.github.io/octokit.rb/

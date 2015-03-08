@@ -1,13 +1,40 @@
-# Datadog Ruby bindings
-# API reference located at http://docs.datadoghq.com/api/
-
-# Core/StdLib
-# ...
-
-# Version
+require 'datadog/client'
+require 'datadog/default'
 require 'datadog/version'
 
-# Top entry point into the Datadog module
+# Ruby toolkit for Datadog API
+#
+# @author Mike Fiedler <miketheman@gmail.com>
+# @since 0.1.0
+# @see http://docs.datadoghq.com/api/
 module Datadog
-  # Your code goes here...
+  class << self
+    include Datadog::Configurable
+
+    # API client based on configured options {Configurable}
+    #
+    # @return [Datadog::Client] API wrapper
+    def client
+      @client = Datadog::Client.new(options) unless defined?(@client) && @client.same_options?(options)
+      @client
+    end
+
+    # @private
+    def respond_to_missing?(method_name, include_private = false)
+      client.respond_to?(method_name, include_private)
+    end if RUBY_VERSION >= '1.9'
+    # @private
+    def respond_to?(method_name, include_private = false)
+      client.respond_to?(method_name, include_private) || super
+    end if RUBY_VERSION < '1.9'
+
+    private
+
+    def method_missing(method_name, *args, &block)
+      return super unless client.respond_to?(method_name)
+      client.send(method_name, *args, &block)
+    end
+  end
 end
+
+Datadog.reset!

@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 # Stylistic choices for this project.
 # Attempts have been made to use good choices, increasing readability and
 # matching current idioms, but sometimes have been overridden here.
@@ -14,6 +16,15 @@ AllCops:
     - 'tasks/**/*'
   Exclude:
     - 'vendor/**/*'
+
+# We like longer lines than 80 characters, but not too long.
+Metrics/LineLength:
+  Max: 160
+
+# Project is documented with YARD, and running `rake yard` should expose any
+# under-documented elements
+Style/Documentation:
+  Enabled: false
 
 # I don't expect to use any Unicode/UTF-8 characters in the codebase, and
 # testing Ruby version 1.9.3 fails rubocop test if this cop is enabled.
